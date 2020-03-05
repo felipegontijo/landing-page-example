@@ -18,7 +18,7 @@
  *
 */
 
-const navList = document.getElementById('nav-list');
+const navbarList = document.getElementById('navbar__list');
 
 const sectionOne = document.getElementById('section1');
 const sectionTwo = document.getElementById('section2');
@@ -31,6 +31,12 @@ const sections = [sectionOne, sectionTwo, sectionThree];
  *
 */
 
+// const createMenuLink = () => {
+//     let menuLink = document.createElement('li');
+//     let anchor = document.createElement('a');
+//     return menuLink.append(anchor);
+// }
+
 
 
 /**
@@ -40,6 +46,21 @@ const sections = [sectionOne, sectionTwo, sectionThree];
 */
 
 // build the nav
+const buildNavbar = () => {
+    sections.forEach(section => {
+        let navbarItem = document.createElement('li');
+        navbarItem.id = 'navbar__item';
+        let navbarLink = document.createElement('a');
+        navbarLink.textContent = section.dataset.nav;
+        navbarLink.href = `#${section.id}`;
+        navbarLink.classList.add('menu__link');
+        navbarItem.append(navbarLink);
+        navbarList.append(navbarItem);
+    });
+}
+
+buildNavbar();
+
 
 
 // Add class 'active' to section when near top of viewport
