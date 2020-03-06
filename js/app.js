@@ -1,7 +1,3 @@
-/**
- * Define Global Variables
- *
-*/
 
 const menu = document.getElementById('navbar__list');
 
@@ -16,20 +12,6 @@ const sectionsModule = ( () => {
     }
 })();
 
-/**
- * End Global Variables
- * Start Helper Functions
- *
-*/
-
-
-/**
- * End Helper Functions
- * Begin Main Functions
- *
-*/
-
-// build the nav
 const populateMenu = () => {
     const sections = sectionsModule.getAllSections();
     sections.forEach(section => {
@@ -63,24 +45,30 @@ const highlightActiveSection = () => {
     const sections = sectionsModule.getAllSections();
     sections.forEach(section => {
         if (isActive(section)) {
-            section.classList.add('your-active-class');
+            section.classList.add('active');
         } else {
-            section.classList.remove('your-active-class');
+            section.classList.remove('active');
         }
     })
 }
 
 const isActive = (element) => {
-    let boundaries = element.getBoundingClientRect();
+    const boundaries = element.getBoundingClientRect();
     return (
-        boundaries.top <= topLimit &&
-        boundaries.bottom >= bottomLimit
+        boundaries.top <= activeViewRange.topLimit &&
+        boundaries.bottom >= activeViewRange.bottomLimit
     )
 }
 
-let windowHeight = window.innerHeight || document.documentElement.clientHeight;
-let topLimit = windowHeight * 0.35;
-let bottomLimit = windowHeight * 0.65;
+const activeViewRange = ( () => {
+    const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+    const topLimit = windowHeight * 0.35;
+    const bottomLimit = windowHeight * 0.65;
+    return {
+        topLimit,
+        bottomLimit
+    }
+})();
 
 window.addEventListener('scroll', highlightActiveSection, false);
 
