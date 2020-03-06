@@ -23,7 +23,8 @@ const navbarList = document.getElementById('navbar__list');
 const sectionOne = document.getElementById('section1');
 const sectionTwo = document.getElementById('section2');
 const sectionThree = document.getElementById('section3');
-const sections = [sectionOne, sectionTwo, sectionThree];
+const sectionFour = document.getElementById('section4');
+const sections = [sectionOne, sectionTwo, sectionThree, sectionFour];
 
 /**
  * End Global Variables
@@ -94,6 +95,9 @@ navbarList.addEventListener('click', function (event) {
     }
     else if (target.getAttribute('href') === '#section3') {
         scrollSmoothlyTo('section3');
+    }
+    else if (target.getAttribute('href') === '#section4') {
+        scrollSmoothlyTo('section4');
     }
     else {
         return;
