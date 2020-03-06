@@ -1,3 +1,7 @@
+/*
+ * Populate navigation menu dynamically
+ *
+ */
 
 const menu = document.getElementById('navbar__list');
 
@@ -37,9 +41,22 @@ const createMenuLink = (element) => {
 
 populateMenu();
 
-// Add class 'active' to section when near top of viewport
-// Adapted from felgall's answer at
-// http://community.sitepoint.com/t/changing-an-element-background-color-on-page-scroll-viewport/193578/17?u=paulob
+/*
+ * Highlight active section
+ *
+ * Adapted from felgall's answer at
+ * http://community.sitepoint.com/t/changing-an-element-background-color-on-page-scroll-viewport/193578/17?u=paulob
+ */
+
+const activeViewRangeModule = ( () => {
+    const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+    const topLimit = windowHeight * 0.35;
+    const bottomLimit = windowHeight * 0.65;
+    return {
+        topLimit,
+        bottomLimit
+    }
+})();
 
 const highlightActiveSection = () => {
     const sections = sectionsModule.getAllSections();
@@ -55,24 +72,18 @@ const highlightActiveSection = () => {
 const isActive = (element) => {
     const boundaries = element.getBoundingClientRect();
     return (
-        boundaries.top <= activeViewRange.topLimit &&
-        boundaries.bottom >= activeViewRange.bottomLimit
+        boundaries.top <= activeViewRangeModule.topLimit &&
+        boundaries.bottom >= activeViewRangeModule.bottomLimit
     )
 }
 
-const activeViewRange = ( () => {
-    const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-    const topLimit = windowHeight * 0.35;
-    const bottomLimit = windowHeight * 0.65;
-    return {
-        topLimit,
-        bottomLimit
-    }
-})();
-
 window.addEventListener('scroll', highlightActiveSection, false);
 
-// Scroll to anchor ID using scrollTO event
+/*
+ * Scroll to section smoothly on menu click
+ *
+ */
+
 menu.addEventListener('click', function (event) {
     event.preventDefault();
     const elementReference = event.target.getAttribute('href');
