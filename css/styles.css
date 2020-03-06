@@ -222,3 +222,9 @@ section.active .landing__container::after {
 		           rotate(-360deg);
 	}
 }
+
+@media only screen and (max-width: 400px) {
+    .menu__link {
+        font-size: 12px;
+    }
+}
