@@ -3,7 +3,7 @@
  *
 */
 
-const navbarList = document.getElementById('navbar__list');
+const menu = document.getElementById('navbar__list');
 
 const sectionsModule = ( () => {
     const sectionsNodeList = document.querySelectorAll('main section');
@@ -30,21 +30,30 @@ const sectionsModule = ( () => {
 */
 
 // build the nav
-const buildNavbar = () => {
+const populateMenu = () => {
     const sections = sectionsModule.getAllSections();
     sections.forEach(section => {
-        let navbarItem = document.createElement('li');
-        navbarItem.id = 'navbar__item';
-        let navbarLink = document.createElement('a');
-        navbarLink.textContent = section.dataset.nav;
-        navbarLink.href = `#${section.id}`;
-        navbarLink.classList.add('menu__link');
-        navbarItem.append(navbarLink);
-        navbarList.append(navbarItem);
+        const menuItem = createMenuItemFor(section);
+        menu.append(menuItem);
     });
 }
 
-buildNavbar();
+const createMenuItemFor = (element) => {
+    const menuItem = document.createElement('li');
+    const menuLink = createMenuLink(element);
+    menuItem.append(menuLink);
+    return menuItem;
+}
+
+const createMenuLink = (element) => {
+    const menuLink = document.createElement('a');
+    menuLink.textContent = element.dataset.nav; // set item name to its section name
+    menuLink.href = `#${element.id}`; // set reference link to proper section
+    menuLink.classList.add('menu__link');
+    return menuLink;
+}
+
+populateMenu();
 
 // Add class 'active' to section when near top of viewport
 // Adapted from felgall's answer at
@@ -76,7 +85,7 @@ let bottomLimit = windowHeight * 0.65;
 window.addEventListener('scroll', highlightActiveSection, false);
 
 // Scroll to anchor ID using scrollTO event
-navbarList.addEventListener('click', function (event) {
+menu.addEventListener('click', function (event) {
     event.preventDefault();
     const target = event.target;
     if (target.getAttribute('href') === '#section1') {
