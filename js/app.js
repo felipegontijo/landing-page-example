@@ -75,22 +75,9 @@ window.addEventListener('scroll', highlightActiveSection, false);
 // Scroll to anchor ID using scrollTO event
 menu.addEventListener('click', function (event) {
     event.preventDefault();
-    const target = event.target;
-    if (target.getAttribute('href') === '#section1') {
-        scrollSmoothlyTo('section1');
-    }
-    else if (target.getAttribute('href') === '#section2') {
-        scrollSmoothlyTo('section2');
-    }
-    else if (target.getAttribute('href') === '#section3') {
-        scrollSmoothlyTo('section3');
-    }
-    else if (target.getAttribute('href') === '#section4') {
-        scrollSmoothlyTo('section4');
-    }
-    else {
-        return;
-    }
+    const elementReference = event.target.getAttribute('href');
+    const sectionLinked = elementReference.substr(1); // remove '#'
+    scrollSmoothlyTo(sectionLinked);
 });
 
 const scrollSmoothlyTo = (sectionId) => {
@@ -113,18 +100,3 @@ const getAbsoluteCoordinates = (element) => {
         top: boundaries.top + amountScrolledVertically
     }
 }
-
-
-/**
- * End Main Functions
- * Begin Events
- *
-*/
-
-// Build menu
-
-// Scroll to section on link click
-
-// Set sections as active
-
-
