@@ -63,6 +63,7 @@ const highlightActiveSection = () => {
     sections.forEach(section => {
         if (isActive(section)) {
             section.classList.add('active');
+            toggleMenuItemActive(section);
         } else {
             section.classList.remove('active');
         }
@@ -75,6 +76,17 @@ const isActive = (element) => {
         boundaries.top <= activeViewRangeModule.topLimit &&
         boundaries.bottom >= activeViewRangeModule.bottomLimit
     )
+}
+
+toggleMenuItemActive = (section) => {
+    const menuLinks = document.querySelectorAll('.menu__link');
+    menuLinks.forEach(menuLink => {
+        if (menuLink.textContent === section.dataset.nav) {
+            menuLink.classList.add('active');
+        } else {
+            menuLink.classList.remove('active');
+        }
+    })
 }
 
 window.addEventListener('scroll', highlightActiveSection, false);
