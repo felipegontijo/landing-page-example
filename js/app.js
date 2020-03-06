@@ -106,7 +106,7 @@ menu.addEventListener('click', function (event) {
 const scrollSmoothlyTo = (sectionId) => {
     const section = document.getElementById(sectionId);
     const leftCoordinate = getAbsoluteCoordinates(section).left;
-    const topCoordinate = getAbsoluteCoordinates(section).top;
+    const topCoordinate = getAbsoluteCoordinates(section).top - 50;
     scrollTo({
         top: topCoordinate,
         left: leftCoordinate,

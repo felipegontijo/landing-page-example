@@ -69,6 +69,7 @@ section {
     margin: 0;
     text-align: right;
     display: flex;
+    place-content: center;
 }
 
 .navbar__menu li {
@@ -113,6 +114,7 @@ section {
 
 .page__footer p{
     color: #fff;
+    text-align: center;
 }
 
 
