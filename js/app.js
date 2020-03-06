@@ -61,10 +61,33 @@ const buildNavbar = () => {
 
 buildNavbar();
 
-
-
 // Add class 'active' to section when near top of viewport
+// Adapted from felgall's answer at
+// http://community.sitepoint.com/t/changing-an-element-background-color-on-page-scroll-viewport/193578/17?u=paulob
 
+const highlightActiveSection = () => {
+    [].forEach.call(document.querySelectorAll('main section'), (element) => {
+        if (isActive(element)) {
+            element.classList.add('your-active-class');
+        } else {
+            element.classList.remove('your-active-class');
+        }
+    })
+}
+
+const isActive = (element) => {
+    let boundaries = element.getBoundingClientRect();
+    return (
+        boundaries.top <= topLimit &&
+        boundaries.bottom >= bottomLimit
+    )
+}
+
+let windowHeight = window.innerHeight || document.documentElement.clientHeight;
+let topLimit = windowHeight * 0.35;
+let bottomLimit = windowHeight * 0.65;
+
+window.addEventListener('scroll', highlightActiveSection, false);
 
 // Scroll to anchor ID using scrollTO event
 
