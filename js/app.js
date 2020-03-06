@@ -31,13 +31,6 @@ const sections = [sectionOne, sectionTwo, sectionThree];
  *
 */
 
-// const createMenuLink = () => {
-//     let menuLink = document.createElement('li');
-//     let anchor = document.createElement('a');
-//     return menuLink.append(anchor);
-// }
-
-
 
 /**
  * End Helper Functions
