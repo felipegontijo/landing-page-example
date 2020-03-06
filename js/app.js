@@ -1,30 +1,20 @@
 /**
- *
- * Manipulating the DOM exercise.
- * Exercise programmatically builds navigation,
- * scrolls to anchors from navigation,
- * and highlights section in viewport upon scrolling.
- *
- * Dependencies: None
- *
- * JS Version: ES2015/ES6
- *
- * JS Standard: ESlint
- *
-*/
-
-/**
  * Define Global Variables
  *
 */
 
 const navbarList = document.getElementById('navbar__list');
 
-const sectionOne = document.getElementById('section1');
-const sectionTwo = document.getElementById('section2');
-const sectionThree = document.getElementById('section3');
-const sectionFour = document.getElementById('section4');
-const sections = [sectionOne, sectionTwo, sectionThree, sectionFour];
+const sectionsModule = ( () => {
+    const sectionsNodeList = document.querySelectorAll('main section');
+    const sections = [...sectionsNodeList];
+    const getAllSections = () => {
+        return sections;
+    }
+    return {
+        getAllSections: getAllSections
+    }
+})();
 
 /**
  * End Global Variables
@@ -41,6 +31,7 @@ const sections = [sectionOne, sectionTwo, sectionThree, sectionFour];
 
 // build the nav
 const buildNavbar = () => {
+    const sections = sectionsModule.getAllSections();
     sections.forEach(section => {
         let navbarItem = document.createElement('li');
         navbarItem.id = 'navbar__item';
@@ -60,11 +51,12 @@ buildNavbar();
 // http://community.sitepoint.com/t/changing-an-element-background-color-on-page-scroll-viewport/193578/17?u=paulob
 
 const highlightActiveSection = () => {
-    [].forEach.call(document.querySelectorAll('main section'), (element) => {
-        if (isActive(element)) {
-            element.classList.add('your-active-class');
+    const sections = sectionsModule.getAllSections();
+    sections.forEach(section => {
+        if (isActive(section)) {
+            section.classList.add('your-active-class');
         } else {
-            element.classList.remove('your-active-class');
+            section.classList.remove('your-active-class');
         }
     })
 }
