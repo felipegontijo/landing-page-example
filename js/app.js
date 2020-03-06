@@ -83,6 +83,43 @@ let bottomLimit = windowHeight * 0.65;
 window.addEventListener('scroll', highlightActiveSection, false);
 
 // Scroll to anchor ID using scrollTO event
+navbarList.addEventListener('click', function (event) {
+    event.preventDefault();
+    const target = event.target;
+    if (target.getAttribute('href') === '#section1') {
+        scrollSmoothlyTo('section1');
+    }
+    else if (target.getAttribute('href') === '#section2') {
+        scrollSmoothlyTo('section2');
+    }
+    else if (target.getAttribute('href') === '#section3') {
+        scrollSmoothlyTo('section3');
+    }
+    else {
+        return;
+    }
+});
+
+const scrollSmoothlyTo = (sectionId) => {
+    const section = document.getElementById(sectionId);
+    const leftCoordinate = getAbsoluteCoordinates(section).left;
+    const topCoordinate = getAbsoluteCoordinates(section).top;
+    scrollTo({
+        top: topCoordinate,
+        left: leftCoordinate,
+        behavior: 'smooth'
+    });
+}
+
+const getAbsoluteCoordinates = (element) => {
+    const boundaries = element.getBoundingClientRect();
+    const amountScrolledHorizontally = window.scrollX;
+    const amountScrolledVertically = window.scrollY;
+    return {
+        left: boundaries.left + amountScrolledHorizontally,
+        top: boundaries.top + amountScrolledVertically
+    }
+}
 
 
 /**
