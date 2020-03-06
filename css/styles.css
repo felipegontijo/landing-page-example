@@ -233,4 +233,7 @@ section.active .landing__container::after {
     .menu__link {
         font-size: 12px;
     }
+    .page__footer {
+        font-size: 12px;
+    }
 }
